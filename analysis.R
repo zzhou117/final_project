@@ -115,3 +115,126 @@ rdplot(
   x.label = "Average Reconciliation Payment from Previous Year",
   title = "Hospital Clinical Episode Category Level Plot"     
 )
+
+
+# Test for assumptions
+# 1. Covariates are approximately identically distributed on each side of the cutoff
+rd_result_a1 <- rdrobust(
+  y = rd_data$teaching,
+  x = rd_data$PositiveNegativeReconciliation_1,
+  c = 0,
+  masspoints = "check",
+  bwselect = "msetwo"
+)
+summary(rd_result_a1)
+rd_result_a2 <- rdrobust(
+  y = rd_data$urban,
+  x = rd_data$PositiveNegativeReconciliation_1,
+  c = 0,
+  masspoints = "check",
+  bwselect = "msetwo"
+)
+summary(rd_result_a2)
+rd_result_a3 <- rdrobust(
+  y = rd_data$safety_net,
+  x = rd_data$PositiveNegativeReconciliation_1,
+  c = 0,
+  masspoints = "check",
+  bwselect = "msetwo"
+)
+summary(rd_result_a3)
+rd_result_a4 <- rdrobust(
+  y = rd_data$hospsize,
+  x = rd_data$PositiveNegativeReconciliation_1,
+  c = 0,
+  masspoints = "check",
+  bwselect = "msetwo"
+)
+summary(rd_result_a4)
+
+# 2.The running variable is not manipulable
+rdd_test <- rddensity(X = final_data$PositiveNegativeReconciliation_1, c = 0)
+summary(rdd_test)
+rdplotdensity(rdd_test, final_data$PositiveNegativeReconciliation_1)
+
+# Sensitivity Analysis
+# Different cutoffs
+rd_data <- final_data[
+  !is.na(leave) & !is.na(PositiveNegativeReconciliation_1)
+]
+rd_result_t1 <- rdrobust(
+  y = rd_data$leave,
+  x = rd_data$PositiveNegativeReconciliation_1,
+  c = 500,
+  masspoints = "check",
+  bwselect = "msetwo"
+)
+summary(rd_result_t1)
+
+rd_data <- final_data[
+  !is.na(leave) & !is.na(PositiveNegativeReconciliation_1)
+]
+rd_result_t2 <- rdrobust(
+  y = rd_data$leave,
+  x = rd_data$PositiveNegativeReconciliation_1,
+  c = -500,
+  masspoints = "check",
+  bwselect = "msetwo"
+)
+summary(rd_result_t2)
+
+
+# MY3 to MY4 (Hospital Clinical Episode Category Withdraw)
+final_data <- readRDS(file.path(sourcedir, "final_data.rds"))
+setorder(final_data, ccn, bpcia_3)
+final_data <- final_data[!(is.infinite(bpcia_3) | bpcia_3 == 0)]
+if ("leave" %in% names(final_data)) {
+  final_data[, leave := NULL]
+}
+
+# Define leave variable
+final_data[
+  !is.na(PositiveNegativeReconciliation_3) & is.na(PositiveNegativeReconciliation_4),
+  leave := 1
+]
+final_data[
+  !is.na(PositiveNegativeReconciliation_3) & !is.na(PositiveNegativeReconciliation_4),
+  leave := 0
+]
+
+setorder(final_data, PositiveNegativeReconciliation_3)
+
+
+rd_data <- final_data[
+  !is.na(leave) & !is.na(PositiveNegativeReconciliation_3)
+]
+rd_result <- rdrobust(
+  y = rd_data$leave,
+  x = rd_data$PositiveNegativeReconciliation_3,
+  c = 0,
+  masspoints = "check",
+  bwselect = "msetwo"
+)
+summary(rd_result)
+
+# Plot the RD results
+rd_data <- final_data[
+  !is.na(leave) &
+  !is.na(PositiveNegativeReconciliation_3) &
+  PositiveNegativeReconciliation_3 >= -15000 &
+  PositiveNegativeReconciliation_3 <= 15000
+]
+rdplot(
+  y = rd_data$leave,
+  x = rd_data$PositiveNegativeReconciliation_3,
+  c = 0,                      # cutoff
+  p = 1,                      # linear polynomial
+  nbins = c(7, 7),            # 7 bins left, 7 bins right
+  masspoints = "check",
+  binselect = "es",
+  y.label = "Probability of Leaving",
+  x.label = "Average Reconciliation Payment from Previous Year",
+  title = "Hospital Clinical Episode Category Level Plot"     
+)
+
+

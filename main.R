@@ -3,6 +3,7 @@ library(data.table)
 library(forcats)
 library(readxl)
 library(rdrobust)
+library(rddensity)
 
 sourcedir <- file.path("D:/GitHub Files/ECON2020/final_project", "source")
 

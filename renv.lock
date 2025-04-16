@@ -2164,6 +2164,28 @@
       "Maintainer": "Lionel Henry <lionel@posit.co>",
       "Repository": "CRAN"
     },
+    "lpdensity": {
+      "Package": "lpdensity",
+      "Version": "2.5",
+      "Source": "Repository",
+      "Title": "Local Polynomial Density Estimation and Inference",
+      "Author": "Matias D. Cattaneo [aut], Michael Jansson [aut], Xinwei Ma [aut, cre]",
+      "Authors@R": "c(person(given = c(\"Matias\", \"D.\"), family = \"Cattaneo\", role = \"aut\"), person(given = \"Michael\", family = \"Jansson\", role = \"aut\"), person(given = \"Xinwei\", family = \"Ma\", role = c(\"aut\", \"cre\"), email = \"x1ma@ucsd.edu\"))",
+      "Maintainer": "Xinwei Ma <x1ma@ucsd.edu>",
+      "Description": "Without imposing stringent distributional assumptions or shape restrictions, nonparametric estimation has been popular in economics and other social sciences for counterfactual analysis, program evaluation, and policy recommendations. This package implements a novel density (and derivatives) estimator based on local polynomial regressions, documented in Cattaneo, Jansson and Ma (2022) <doi:10.18637/jss.v101.i02>: lpdensity() to construct local polynomial based density (and derivatives) estimator, and lpbwdensity() to perform data-driven bandwidth selection.",
+      "Imports": [
+        "ggplot2",
+        "MASS"
+      ],
+      "Depends": [
+        "R (>= 3.1)"
+      ],
+      "License": "GPL-2",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.2",
+      "NeedsCompilation": "no",
+      "Repository": "CRAN"
+    },
     "lubridate": {
       "Package": "lubridate",
       "Version": "1.9.4",
@@ -2783,6 +2805,29 @@
       "NeedsCompilation": "yes",
       "Author": "Hadley Wickham [trl, cre, cph], RStudio [cph], Sridhar Ratnakumar [aut], Trent Mick [aut], ActiveState [cph] (R/appdir.r, R/cache.r, R/data.r, R/log.r translated from appdirs), Eddy Petrisor [ctb], Trevor Davis [trl, aut], Gabor Csardi [ctb], Gregory Jefferis [ctb]",
       "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
+      "Repository": "CRAN"
+    },
+    "rddensity": {
+      "Package": "rddensity",
+      "Version": "2.6",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Manipulation Testing Based on Density Discontinuity",
+      "Description": "Density discontinuity testing (a.k.a. manipulation testing) is commonly employed in regression discontinuity designs and other program evaluation settings to detect perfect self-selection (manipulation) around a cutoff where treatment/policy assignment changes. This package implements manipulation testing procedures using the local polynomial density estimators: rddensity() to construct test statistics and p-values given a prespecified cutoff, rdbwdensity() to perform data-driven bandwidth selection, and rdplotdensity() to construct density plots.",
+      "Author": "Matias D. Cattaneo [aut], Michael Jansson [aut], Xinwei Ma [aut, cre]",
+      "Authors@R": "c(person(given = c(\"Matias\", \"D.\"), family = \"Cattaneo\", role = \"aut\"), person(given = \"Michael\", family = \"Jansson\", role = \"aut\"), person(given = \"Xinwei\", family = \"Ma\", role = c(\"aut\", \"cre\"), email = \"x1ma@ucsd.edu\"))",
+      "Maintainer": "Xinwei Ma <x1ma@ucsd.edu>",
+      "Imports": [
+        "ggplot2",
+        "lpdensity (>= 2.2)"
+      ],
+      "Depends": [
+        "R (>= 3.1.0)"
+      ],
+      "License": "GPL-2",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.0",
+      "NeedsCompilation": "no",
       "Repository": "CRAN"
     },
     "rdrobust": {
